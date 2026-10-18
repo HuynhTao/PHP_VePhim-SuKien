@@ -60,8 +60,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Hướng dẫn 
 - **Tên data**: webphim
-- **cmd **: php artisan migrate --seed
-              php artisan serve
+- **CMD**
+- php artisan migrate --seed
+- php artisan serve
 ## Đường dẫn chính
 
 | Đường dẫn | Nội dung |
