@@ -57,3 +57,18 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Hướng dẫn 
+- **Tên data**: webphim
+- **cmd **: php artisan migrate --seed
+              php artisan serve
+## Đường dẫn chính
+
+| Đường dẫn | Nội dung |
+|---|---|
+| `/` | Trang chủ |
+| `/dang-ky` | Đăng ký |
+| `/dang-nhap` | Đăng nhập |
+| `/dang-xuat` (POST) | Đăng xuất |
+| `/tai-khoan` | Thông tin tài khoản đang đăng nhập |
+| `/quan-tri/nguoi-dung` | CRUD tài khoản, chỉ Admin
