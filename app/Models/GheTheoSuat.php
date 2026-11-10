@@ -8,8 +8,7 @@ class GheTheoSuat extends Model
 {
     protected $table = 'ghe_theo_suat';
 
-    protected $fillable = ['suat_id', 'ghe_ngoi_id', 'gia_ve', 'trang_thai', 'giu_den_luc'];
-
+    protected $fillable = ['suat_id', 'ghe_ngoi_id', 'gia_ve', 'trang_thai', 'giu_den_luc', 'giu_boi_don_hang_id'];
     protected function casts(): array
     {
         return ['gia_ve' => 'decimal:2', 'giu_den_luc' => 'datetime'];
@@ -23,6 +22,11 @@ class GheTheoSuat extends Model
     public function gheNgoi(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(GheNgoi::class, 'ghe_ngoi_id');
+    }
+
+    public function donHangGiu(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(DonHang::class, 'giu_boi_don_hang_id');
     }
 
     public function ve(): \Illuminate\Database\Eloquent\Relations\HasOne

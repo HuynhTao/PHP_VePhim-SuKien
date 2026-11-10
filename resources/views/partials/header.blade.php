@@ -5,6 +5,7 @@
             <a href="{{ route('home') }}" @class(['active' => request()->routeIs('home') && !request('loai')])>Khám phá</a>
             <a href="{{ route('home', ['loai' => 'phim']) }}" @class(['active' => request('loai') === 'phim'])>Phim</a>
             <a href="{{ route('home', ['loai' => 'su_kien']) }}" @class(['active' => request('loai') === 'su_kien'])>Sự kiện</a>
+            <a href="{{ route('datve.index') }}" @class(['active' => request()->routeIs('datve.*')])>Đặt vé</a>
            @auth
     @if(auth()->user()->isAdmin())
         <a href="{{ route('admin.users.index') }}"

@@ -7,6 +7,7 @@
     <title>@yield('title', 'Khám phá phim & sự kiện') ·VePhim/SuKien</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/m3.css') }}">
+@stack('styles')
 </head>
 <body>
 <a class="skip-link" href="#main">Đến nội dung chính</a>
@@ -19,6 +20,7 @@
     @yield('content')
 </main>
 @include('partials.footer')
+@stack('scripts')
 </body>
 </html>
 
