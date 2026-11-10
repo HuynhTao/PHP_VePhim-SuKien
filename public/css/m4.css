@@ -1,0 +1,131 @@
+.dv-page{padding:40px 0 60px}
+.dv-dates{display:flex;gap:10px;overflow-x:auto;margin:20px 0}
+.dv-dates a{min-width:72px;text-align:center;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--ink);display:flex;flex-direction:column}
+.dv-dates a.active{background:var(--green);color:#fff;border-color:var(--green)}
+.dv-dates a:hover{text-decoration:none}
+.dv-film{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px}
+.dv-film h3{margin-bottom:6px}
+.dv-rap{margin-top:16px;border-top:1px solid var(--border);padding-top:14px}
+.dv-rap h4{margin:0 0 10px;font-size:15px}
+.dv-times{display:flex;gap:10px;flex-wrap:wrap}
+.dv-time{display:flex;flex-direction:column;padding:8px 14px;border:1px solid var(--green);border-radius:8px;color:var(--green);font-weight:700;background:#fff}
+.dv-time small{font-weight:400;color:var(--muted);font-size:11px}
+.dv-time:hover{background:var(--mint);text-decoration:none}
+.dv-layout{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;margin-top:20px}
+.dv-panel{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px}
+.dv-screen{background:#edf2eb;padding:9px;text-align:center;border-radius:8px;margin-bottom:20px;letter-spacing:3px;font-size:12px}
+.dv-scroll{overflow:auto;padding:6px 0}
+.dv-row{display:flex;gap:7px;align-items:center;min-width:max-content;margin:7px 0}
+.dv-rowname{width:28px;text-align:center;font-weight:700;color:var(--muted)}
+.dv-seat{position:relative;width:44px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #9cbead;border-radius:8px;font-size:12px;background:#d8ebe2;cursor:pointer;user-select:none}
+.dv-seat input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:100%;height:100%}
+.dv-seat.vip{background:#fff0c6;border-color:#c7a451}
+.dv-seat.chon{background:var(--green);border-color:var(--green);color:#fff}
+.dv-seat.dang_giu{background:#dce4fa;border-color:#8c9ec9;cursor:not-allowed}
+.dv-seat.da_ban{background:#f7d5cf;border-color:#c48b83;color:#9a6a63;cursor:not-allowed;text-decoration:line-through}
+.dv-seat.tam_khoa{background:#e6e6e6;color:#666;border-color:#aaa;cursor:not-allowed}
+.dv-seat.cua-toi{outline:2px solid var(--orange)}
+.dv-seat.dang_giu input,.dv-seat.da_ban input,.dv-seat.tam_khoa input{cursor:not-allowed}
+.dv-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:16px}
+.dv-legend i{display:inline-block;width:16px;height:16px;border-radius:4px;border:1px solid #9cbead;vertical-align:-3px;margin-right:5px}
+.dv-total{font-size:26px;font-weight:800;color:var(--green)}
+.dv-toast{display:none;margin-top:12px;padding:10px 14px;border-radius:8px;background:#fff0ed;color:#963d2d;border:1px solid #eac0b6;font-size:13px}
+.dv-methods label{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;cursor:pointer}
+.dv-methods input{width:auto}
+.dv-timer{font-weight:800;color:#a53535;font-size:20px}
+.dv-ticket{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border:2px dashed #b9b092;background:#fff4d9;border-radius:12px;padding:16px 20px;margin-bottom:12px}
+.dv-ticket strong{font-size:22px;letter-spacing:1px}
+.dv-ok{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;font-size:34px;display:grid;place-items:center;margin:0 auto 14px}
+@media(max-width:900px){.dv-layout{grid-template-columns:1fr}}
+
+/* ===== M4 v2: giao diện rạp chiếu ===== */
+.dv-page{padding:26px 0 70px}
+.dv-hero{border-radius:22px;padding:40px 44px;margin-bottom:26px;color:#fff;background:radial-gradient(ellipse at 92% 0,#f1ad6c66,transparent 55%),linear-gradient(120deg,#0e3a31,#136858 65%,#1f8a74)}
+.dv-hero h1{color:#fff;font-size:clamp(28px,4vw,44px);margin-bottom:10px}
+.dv-hero p{color:#d8ebe2;margin:0;max-width:560px}
+.dv-hero .eyebrow{color:#f1ad6c}
+.dv-dates{gap:12px;padding:4px 2px 12px}
+.dv-dates a{min-width:78px;border-radius:14px;padding:12px 10px;transition:.15s;box-shadow:0 2px 6px #0000000d}
+.dv-dates a:hover{transform:translateY(-2px);border-color:var(--green)}
+.dv-dates a.active{background:linear-gradient(135deg,#136858,#1f8a74);box-shadow:0 8px 18px #13685855}
+.dv-dates a strong{font-size:18px}
+
+/* thẻ phim */
+.dv-film{display:grid;grid-template-columns:190px 1fr;gap:28px;padding:22px;border-radius:20px;transition:.2s}
+.dv-film:hover{box-shadow:0 16px 36px #17343024;transform:translateY(-2px)}
+.dv-film h3{font-size:26px;margin:4px 0 8px}
+.dv-meta{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--muted);font-size:13px;margin-bottom:10px}
+.dv-desc{color:var(--muted);font-size:14px;margin:0 0 6px}
+.dv-poster{position:relative;aspect-ratio:2/3;border-radius:14px;background-size:cover;background-position:center;overflow:hidden;box-shadow:0 12px 26px #0003;display:flex;align-items:flex-end;padding:16px}
+.dv-poster::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,#000a,transparent 55%)}
+.dv-poster-title{position:relative;z-index:1;color:#fff;font-weight:800;font-size:22px;line-height:1.15;letter-spacing:-.03em}
+.dv-poster-sm{width:84px;flex:none;border-radius:10px;padding:8px}
+.dv-poster-sm .dv-poster-title{font-size:10px}
+.dv-poster-md{width:120px;flex:none;border-radius:12px;padding:10px}
+.dv-poster-md .dv-poster-title{font-size:13px}
+.dv-badges{position:absolute;top:10px;left:10px;z-index:2;display:flex;gap:6px}
+.dv-badge{background:#f1ad6c;color:#2b1b00;font-weight:800;font-size:11px;padding:3px 8px;border-radius:6px}
+.dv-badge.alt{background:#ffffff33;color:#fff;backdrop-filter:blur(4px)}
+.dv-rap h4{font-size:15px}
+.dv-times{gap:12px}
+.dv-time{min-width:116px;border-radius:12px;padding:10px 14px;border-width:1.5px;font-size:18px;transition:.15s}
+.dv-time:hover{background:var(--green);color:#fff;transform:translateY(-2px);box-shadow:0 8px 16px #13685844}
+.dv-time small{font-size:11px}
+.dv-time em{font-style:normal;font-size:11px;color:var(--green);font-weight:600}
+.dv-time:hover small,.dv-time:hover em{color:#e4f3ec}
+.dv-time.low{border-color:#e08a3c;color:#c4651a}.dv-time.low em{color:#c4651a}
+.dv-time.full{border-color:#ccc;color:#999;background:#f3f3f3}.dv-time.full em{color:#a33}
+
+/* trang chọn ghế */
+.dv-movie{display:flex;gap:22px;align-items:flex-end;margin:10px 0 6px}
+.dv-movie h1{margin:4px 0 8px}
+.dv-layout{grid-template-columns:1fr 370px;gap:28px}
+.dv-panel{border-radius:18px;padding:28px}
+.dv-screen{height:48px;border-radius:50% 50% 0 0/100% 100% 0 0;background:linear-gradient(to bottom,#cfe3d8,transparent);border-top:4px solid var(--green);color:var(--green);font-weight:700;letter-spacing:6px;margin:0 8% 34px;display:flex;align-items:center;justify-content:center}
+.dv-scroll{overflow-x:auto;padding:8px 0 14px}
+.dv-row{display:flex;gap:7px;align-items:center;justify-content:center;min-width:calc(var(--n,10) * 40px + 70px);margin:10px 0}
+.dv-rowname{flex:none;width:26px;text-align:center;font-weight:800;color:var(--muted)}
+.dv-aisle{flex:0 0 24px}
+.dv-seat{flex:1 1 0;min-width:34px;max-width:60px;height:48px;border-radius:12px 12px 6px 6px;border-bottom-width:4px;font-size:13px;font-weight:600;transition:transform .12s,box-shadow .12s,background .12s}
+.dv-seat:not(.dang_giu):not(.da_ban):not(.tam_khoa):hover{transform:translateY(-4px);box-shadow:0 8px 14px #0002}
+.dv-seat.vip{background:linear-gradient(180deg,#ffe9a8,#fff0c6)}
+.dv-seat.chon{background:linear-gradient(180deg,#1f8a74,#136858);animation:dvpop .18s ease-out}
+.dv-seat.dang_giu{background:repeating-linear-gradient(45deg,#dce4fa,#dce4fa 5px,#c9d4f3 5px,#c9d4f3 10px)}
+.dv-seat.da_ban{background:#ead5d0;color:#b3938d;opacity:.8}
+.dv-seat.cua-toi{outline:3px solid var(--orange)}
+@keyframes dvpop{50%{transform:scale(1.18)}}
+.dv-legend{gap:20px;font-size:13px;margin-top:18px}
+.lg{display:inline-block;width:18px;height:16px;border-radius:5px 5px 3px 3px;border:1px solid #9cbead;vertical-align:-3px;margin-right:6px}
+.lg.trong{background:#d8ebe2}.lg.vip{background:#ffe9a8;border-color:#c7a451}.lg.chon{background:var(--green);border-color:var(--green)}.lg.giu{background:#c9d4f3;border-color:#8c9ec9}.lg.ban{background:#ead5d0;border-color:#c48b83}
+.dv-legend i{all:unset}
+.dv-summary{position:sticky;top:20px}
+.dv-sumhead{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.dv-sumhead h3{font-size:18px;margin:0 0 4px}
+.dv-prices{display:flex;flex-direction:column;gap:6px;padding:12px 14px;background:#f4f7f2;border-radius:12px;margin-bottom:14px;font-size:14px}
+.dv-prices strong{float:right}
+.dv-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px;min-height:30px}
+.dv-chip{background:var(--mint);color:var(--green);font-weight:700;padding:4px 12px;border-radius:20px;font-size:13px}
+.dv-totalrow{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:14px;margin-bottom:6px}
+.dv-go{padding:16px;font-size:16px;border-radius:12px;background:linear-gradient(120deg,#136858,#1f8a74);box-shadow:0 10px 20px #13685844}
+.dv-go:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+/* thanh toán */
+.dv-methods label{border-radius:14px;padding:16px;transition:.15s}
+.dv-methods label:hover{border-color:var(--green)}
+.dv-methods label:has(input:checked){border-color:var(--green);background:var(--mint);box-shadow:0 0 0 2px #13685833}
+
+/* vé thành công */
+.dv-ticket2{display:grid;grid-template-columns:110px 1fr 150px;background:#fff;border-radius:16px;box-shadow:0 12px 30px #17343024;overflow:hidden;margin-bottom:18px}
+.dv-ticket2 .dv-poster{width:auto;height:100%;aspect-ratio:auto;border-radius:0;box-shadow:none}
+.dv-ticket2-body{padding:20px 22px}
+.dv-ticket2-body h3{margin:4px 0 8px}
+.dv-ticket2-stub{border-left:2px dashed #cfd8cf;padding:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:6px;background:#fbf7ea}
+.dv-seatbig{font-size:38px;color:var(--green);line-height:1}
+.dv-barcode{height:42px;margin-bottom:4px;background:repeating-linear-gradient(90deg,#172b2b 0 2px,transparent 2px 5px,#172b2b 5px 6px,transparent 6px 10px)}
+
+@media(max-width:900px){.dv-layout{grid-template-columns:1fr}.dv-summary{position:static}}
+@media(max-width:640px){
+  .dv-film{grid-template-columns:110px 1fr;gap:14px;padding:14px}.dv-film h3{font-size:19px}
+  .dv-hero{padding:26px 22px}.dv-movie{flex-direction:column;align-items:flex-start}
+  .dv-ticket2{grid-template-columns:80px 1fr}.dv-ticket2-stub{grid-column:1/-1;border-left:0;border-top:2px dashed #cfd8cf;flex-direction:row;justify-content:space-around;align-items:center}
+}

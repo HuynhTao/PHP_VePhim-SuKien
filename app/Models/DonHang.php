@@ -20,6 +20,11 @@ class DonHang extends Model
         return $this->belongsTo(User::class, 'nguoi_dung_id');
     }
 
+    public function gheDangGiu(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(GheTheoSuat::class, 'giu_boi_don_hang_id');
+    }
+
     public function ves(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Ve::class, 'don_hang_id');
