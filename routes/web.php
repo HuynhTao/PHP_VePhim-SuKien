@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LichSuDatVeController;
+use App\Http\Controllers\Admin\DonHangController;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -27,4 +29,9 @@ Route::middleware(['auth', 'role:admin,user'])->group(function () {
 Route::prefix('quan-tri')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::redirect('/', '/quan-tri/nguoi-dung');
     Route::resource('nguoi-dung', UserController::class)->parameters(['nguoi-dung' => 'user'])->names('users');
+
+    Route::get('don-hang', [DonHangController::class, 'index'])->name('orders.index');
+    Route::get('don-hang/{donHang}', [DonHangController::class, 'show'])->name('orders.show');
+    Route::patch('don-hang/{donHang}/trang-thai', [DonHangController::class, 'updateStatus'])->name('orders.status');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 });

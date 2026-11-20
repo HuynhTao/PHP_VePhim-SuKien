@@ -13,7 +13,13 @@
         @auth
         <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">Vé của tôi</a></li>
           @if(auth()->user()->isAdmin())
-            <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}">Quản trị</a></li>
+          <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Quản trị</a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{{ route('admin.orders.index') }}">Đơn đặt vé</a></li>
+    <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Tài khoản</a></li>
+  </ul>
+</li>
           @endif
         @endauth
       </ul>
