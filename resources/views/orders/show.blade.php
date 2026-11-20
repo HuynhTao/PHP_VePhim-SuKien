@@ -34,5 +34,14 @@
   </div>
 
   <p class="fs-5">Tổng tiền: <strong>{{ number_format($donHang->tong_tien, 0, ',', '.') }}đ</strong></p>
+  @if($coTheHuy)
+  <form method="POST" action="{{ route('orders.cancel', $donHang) }}"
+        onsubmit="return confirm('Bạn chắc chắn muốn hủy đơn này?')">
+    @csrf
+    <button class="btn btn-danger">Hủy đơn</button>
+  </form>
+@else
+  <p class="text-muted small">Đơn này không thể hủy.</p>
+@endif
 </div>
 @endsection

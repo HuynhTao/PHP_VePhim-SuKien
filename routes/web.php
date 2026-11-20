@@ -17,9 +17,11 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/dang-xuat', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::view('/tai-khoan', 'auth.account')->middleware(['auth', 'role:admin,user'])->name('account');
+
 Route::middleware(['auth', 'role:admin,user'])->group(function () {
     Route::get('/lich-su-dat-ve', [LichSuDatVeController::class, 'index'])->name('orders.index');
     Route::get('/lich-su-dat-ve/{donHang}', [LichSuDatVeController::class, 'show'])->name('orders.show');
+    Route::post('/lich-su-dat-ve/{donHang}/huy', [LichSuDatVeController::class, 'cancel'])->name('orders.cancel');
 });
 
 Route::prefix('quan-tri')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
