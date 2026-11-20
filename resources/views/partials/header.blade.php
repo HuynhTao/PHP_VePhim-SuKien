@@ -11,6 +11,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('home', ['loai' => 'phim']) }}">Phim</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('home', ['loai' => 'su_kien']) }}">Sự kiện</a></li>
         @auth
+        <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">Vé của tôi</a></li>
           @if(auth()->user()->isAdmin())
             <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}">Quản trị</a></li>
           @endif
