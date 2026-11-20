@@ -1,11 +1,21 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DiaDiemController;
+use App\Http\Controllers\Admin\GheNgoiController;
+use App\Http\Controllers\Admin\PhimSuKienController;
+use App\Http\Controllers\Admin\PhongChieuController;
+use App\Http\Controllers\Admin\SuatController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\NoiDungController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+// ===== M2: trang chi tiết + tìm kiếm nhanh AJAX =====
+Route::get('/noi-dung/{noiDung}', [NoiDungController::class, 'show'])->name('noi-dung.show');
+Route::get('/tim-kiem-nhanh', [NoiDungController::class, 'quickSearch'])->name('noi-dung.search');
 
 Route::middleware('guest')->group(function () {
     Route::get('/dang-ky', [AuthController::class, 'register'])->name('register');
@@ -20,4 +30,21 @@ Route::view('/tai-khoan', 'auth.account')->middleware(['auth', 'role:admin,user'
 Route::prefix('quan-tri')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::redirect('/', '/quan-tri/nguoi-dung');
     Route::resource('nguoi-dung', UserController::class)->parameters(['nguoi-dung' => 'user'])->names('users');
+    Route::resource('dia-diem', DiaDiemController::class)
+        ->parameters(['dia-diem' => 'diaDiem'])
+        ->except(['show']);
+    Route::get('dia-diem/{diaDiem}/ban-do', [DiaDiemController::class, 'map'])->name('dia-diem.map');
+    Route::resource('phong-chieu', PhongChieuController::class)->parameters(['phong-chieu' => 'phongChieu']);
+    Route::post('phong-chieu/{phongChieu}/sinh-ghe', [GheNgoiController::class, 'generate'])->name('ghe.generate');
+    Route::post('phong-chieu/{phongChieu}/ghe', [GheNgoiController::class, 'store'])->name('ghe.store');
+    Route::put('phong-chieu/{phongChieu}/ghe/{gheNgoi}', [GheNgoiController::class, 'update'])->name('ghe.update');
+    Route::delete('phong-chieu/{phongChieu}/ghe/{gheNgoi}', [GheNgoiController::class, 'destroy'])->name('ghe.destroy');
+    Route::resource('suat', SuatController::class);
+
+    // ===== M2: quản lý phim / sự kiện =====
+    Route::resource('phim-su-kien', PhimSuKienController::class)
+        ->parameters(['phim-su-kien' => 'noiDung'])
+        ->names('noidung')
+        ->except(['show']);
+
 });

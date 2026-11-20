@@ -10,7 +10,7 @@ class Phim extends Model
     protected $primaryKey = 'noi_dung_id';
     public $incrementing = false;
 
-    protected $fillable = ['noi_dung_id', 'thoi_luong_phut', 'gioi_han_tuoi', 'ngon_ngu', 'ngay_khoi_chieu'];
+    protected $fillable = ['noi_dung_id', 'thoi_luong_phut', 'gioi_han_tuoi', 'ngon_ngu', 'the_loai', 'ngay_khoi_chieu'];
 
     protected function casts(): array
     {
