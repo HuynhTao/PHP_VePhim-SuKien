@@ -7,12 +7,16 @@ use App\Models\DonHang;
 use App\Models\Suat;
 use App\Models\User;
 use App\Models\Ve;
-use Illuminate\Support\Facades\DB;
+use App\Services\DatVeService;
+
 
 class DashboardController extends Controller
 {
+      public function __construct(private DatVeService $datVe) {}
     public function __invoke()
     {
+        
+        $this->datVe->nhaGheHetHan();
         // --- Các ô số liệu ---
         $tongDoanhThu = DonHang::where('trang_thai', 'da_thanh_toan')->sum('tong_tien');
         $tongDon      = DonHang::count();

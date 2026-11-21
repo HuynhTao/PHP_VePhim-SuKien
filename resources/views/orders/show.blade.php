@@ -12,6 +12,7 @@
     @include('orders._badge', ['trangThai' => $donHang->trang_thai])
   </div>
 
+@if($donHang->ves->isNotEmpty())
   <div class="table-responsive mb-3">
     <table class="table align-middle">
       <thead>
@@ -32,9 +33,21 @@
       </tbody>
     </table>
   </div>
+@elseif($donHang->gheDangGiu->isNotEmpty())
+  @include('orders._ghe_dang_giu')
+@endif
 
   <p class="fs-5">Tổng tiền: <strong>{{ number_format($donHang->tong_tien, 0, ',', '.') }}đ</strong></p>
-  @if($coTheHuy)
+  @if($donHang->trang_thai === 'cho_thanh_toan' && $donHang->gheDangGiu->isNotEmpty())
+  <div class="d-flex gap-2 flex-wrap">
+    <a class="btn btn-success" href="{{ route('datve.thanh-toan', $donHang) }}">Tiếp tục thanh toán</a>
+    <form method="POST" action="{{ route('datve.huy', $donHang) }}"
+          onsubmit="return confirm('Hủy giữ ghế và hủy đơn này?')">
+      @csrf
+      <button class="btn btn-outline-danger">Hủy đơn</button>
+    </form>
+  </div>
+@elseif($coTheHuy)
   <form method="POST" action="{{ route('orders.cancel', $donHang) }}"
         onsubmit="return confirm('Bạn chắc chắn muốn hủy đơn này?')">
     @csrf

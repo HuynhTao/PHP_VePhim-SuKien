@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\DonHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Services\DatVeService;
 class LichSuDatVeController extends Controller
 {
+    public function __construct(private DatVeService $datVe) {}
     // Chỉ được hủy khi còn ít nhất 2 giờ trước giờ chiếu
     private const GIO_TOI_THIEU_DE_HUY = 2;
 
@@ -32,6 +33,9 @@ class LichSuDatVeController extends Controller
             'ves.gheTheoSuat.suat.noiDung',
             'ves.gheTheoSuat.suat.phongChieu.diaDiem',
             'thanhToans',
+            'gheDangGiu.gheNgoi',
+'gheDangGiu.suat.noiDung',
+'gheDangGiu.suat.phongChieu.diaDiem',
         ]);
 
         return view('orders.show', [

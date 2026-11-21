@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\DatVeService;
 
+
 class DonHangController extends Controller
 {
+    public function __construct(private DatVeService $datVe) {}
     public function index(Request $request)
     {
+        $this->datVe->nhaGheHetHan();
         $donHangs = DonHang::with('nguoiDung')
             ->withCount('ves')
             ->when($request->filled('q'), function ($query) use ($request) {
@@ -35,12 +38,16 @@ class DonHangController extends Controller
 
     public function show(DonHang $donHang)
     {
+        $this->datVe->nhaGheHetHan();
         $donHang->load([
             'nguoiDung',
             'ves.gheTheoSuat.gheNgoi',
             'ves.gheTheoSuat.suat.noiDung',
             'ves.gheTheoSuat.suat.phongChieu.diaDiem',
             'thanhToans',
+            'gheDangGiu.gheNgoi',
+'gheDangGiu.suat.noiDung',
+'gheDangGiu.suat.phongChieu.diaDiem',
         ]);
 
         return view('admin.orders.show', compact('donHang'));

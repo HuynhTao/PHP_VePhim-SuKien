@@ -21,6 +21,7 @@
     </div>
   </div>
 
+@if($donHang->ves->isNotEmpty())
   <div class="table-responsive mb-3">
     <table class="table align-middle">
       <thead>
@@ -42,6 +43,9 @@
       </tbody>
     </table>
   </div>
+@elseif($donHang->gheDangGiu->isNotEmpty())
+  @include('orders._ghe_dang_giu')
+@endif
 
   <p class="fs-5">Tổng tiền: <strong>{{ number_format($donHang->tong_tien, 0, ',', '.') }}đ</strong></p>
 
