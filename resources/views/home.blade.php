@@ -12,7 +12,7 @@
     <div class="section-heading"><div><span class="eyebrow">LÊN LỊCH HẸN</span><h2>Phim & sự kiện nổi bật</h2></div><span class="muted">{{ $contents->total() }} nội dung</span></div>
     <form method="GET" action="{{ route('home') }}" class="filter-bar">
         <label class="sr-only" for="q">Tìm theo tên</label><input id="q" name="q" value="{{ request('q') }}" placeholder="Tìm phim, sự kiện..." maxlength="100">
-        <label class="sr-only" for="loai">Loại nội dung</label><select id="loai" name="loai"><option value="">Tất cả nội dung</option value="phim" @selected(request('loai') === 'phim')>Phim</option><option value="su_kien" @selected(request('loai') === 'su_kien')>Sự kiện</option></select>
+        <label class="sr-only" for="loai">Loại nội dung</label><select id="loai" name="loai"><option value="">Tất cả nội dung<option value="phim" @selected(request('loai') === 'phim')>Phim</option><option value="su_kien" @selected(request('loai') === 'su_kien')>Sự kiện</option></select>
         <button class="btn">Tìm kiếm</button><a class="muted" href="{{ route('home') }}">Đặt lại</a>
     </form>
     <div class="card-grid">
@@ -27,7 +27,7 @@
                 <div class="metadata">@if($content->phim){{ $content->phim->thoi_luong_phut }} phút · {{ $content->phim->ngon_ngu }}@else{{ $content->suKien?->the_loai ?? 'Sự kiện' }} · {{ $content->suKien?->don_vi_to_chuc }}@endif</div>
                 <p>{{ $content->mo_ta }}</p>
                 @forelse($content->suats->take(3) as $session)
-                    <div class="showtime"><strong>{{ $session->bat_dau_luc->format('d/m · H:i') }}</strong><span>{{ $session->phongChieu->ten_phong }}</span><small>{{ $session->phongChieu->diaDiem->ten_dia_diem }}</small></div>
+                    <div class="showtime"><strong>{{ $session->bat_dau_luc->format('d/m · H:i') }}</strong><span>{{ $session->phongChieu->ten_phong }}</span><small>{{ $session->phongChieu->diaDiem->ten_dia_diem }}</small><a class="btn btn-small" href="{{ route('datve.chon-ghe', $session) }}">Đặt vé</a></div>
                 @empty
                     <div class="showtime muted">Lịch diễn đang được cập nhật.</div>
                 @endforelse

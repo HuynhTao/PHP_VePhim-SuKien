@@ -7,6 +7,7 @@
     <title>@yield('title', 'Khám phá phim & sự kiện') ·VePhim/SuKien</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('css/m3.css') }}">
 <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 @stack('styles')
 </head>
@@ -26,11 +27,10 @@
         <ul class="mb-0">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
     </div>
 @endif
-@yield('content')
+    @yield('content')
 </main>
 @include('partials.footer')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @stack('scripts')
 </body>
 </html>
-

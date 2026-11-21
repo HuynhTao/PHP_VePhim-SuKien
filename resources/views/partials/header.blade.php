@@ -10,6 +10,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Khám phá</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('home', ['loai' => 'phim']) }}">Phim</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('home', ['loai' => 'su_kien']) }}">Sự kiện</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('datve.index') }}">Đặt vé</a></li>
         @auth
         <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">Vé của tôi</a></li>
           @if(auth()->user()->isAdmin())
@@ -19,6 +20,10 @@
       <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
       <li><a class="dropdown-item" href="{{ route('admin.orders.index') }}">Đơn đặt vé</a></li>
       <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Tài khoản</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="{{ route('admin.dia-diem.index') }}">Quản lý rạp</a></li>
+      <li><a class="dropdown-item" href="{{ route('admin.phong-chieu.index') }}">Phòng &amp; ghế</a></li>
+      <li><a class="dropdown-item" href="{{ route('admin.suat.index') }}">Suất chiếu</a></li>
     </ul>
   </li>
 @endif
