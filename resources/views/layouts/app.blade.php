@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Khám phá phim & sự kiện') ·VePhim/SuKien</title>
+    <title>@yield('title', 'Khám phá phim & sự kiện') · VePhim/SuKien</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/m3.css') }}">
-@stack('styles')
+    <link rel="stylesheet" href="{{ asset('css/m2.css') }}">
+    @stack('styles')
 </head>
 <body>
 <a class="skip-link" href="#main">Đến nội dung chính</a>
@@ -23,4 +24,3 @@
 @stack('scripts')
 </body>
 </html>
-

@@ -1,0 +1,73 @@
+/* M2 - Quản lý Phim/Sự kiện & Trang chủ (MoMo Cinema Theme) */
+.m2-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;padding:6px;background:#fff;border:1px solid var(--border);border-radius:999px;width:fit-content;max-width:100%;overflow-x:auto}
+.m2-tabs a{padding:8px 16px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-size:14px;font-weight:650;white-space:nowrap}
+.m2-tabs a:hover{text-decoration:none;color:var(--green)}
+.m2-tabs a.active{background:linear-gradient(135deg,#e13092,#b80d6f);color:#fff;box-shadow:0 4px 12px rgba(216,45,139,.3)}
+
+.quick-wrap{position:relative;flex:1;min-width:220px}
+.quick-wrap input{width:100%}
+.quick-results{position:absolute;z-index:40;left:0;right:0;top:100%;margin-top:6px;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 14px 36px rgba(24,19,38,.16);overflow:hidden}
+.quick-item{display:flex;gap:12px;align-items:center;padding:10px 14px;color:var(--ink);border-bottom:1px solid #f5edf7}
+.quick-item:last-child{border-bottom:0}
+.quick-item:hover{background:var(--mint);text-decoration:none}
+.quick-thumb{width:38px;height:54px;object-fit:cover;border-radius:6px;background:var(--mint);flex:none}
+.quick-item small{display:block;color:var(--muted);font-size:12px}
+.quick-empty{padding:14px;color:var(--muted);font-size:13.5px}
+
+.poster-img{background-size:cover;background-position:center top}
+.card-more{display:inline-block;margin-top:12px;font-weight:700;font-size:13px;align-self:flex-start;padding:8px 14px;border-radius:9px;background:var(--mint);color:var(--green)}
+.card-more:hover{background:var(--green);color:#fff;text-decoration:none}
+.soon-tag{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:20px;background:#fdf0d5;color:#8a5a00;font-size:11px;font-weight:700}
+
+textarea{width:100%;min-height:120px;padding:11px 13px;background:#fff;border:1.5px solid #dfd3e6;border-radius:10px;color:var(--ink);font:inherit;resize:vertical}
+textarea:focus{border-color:var(--green);outline:none;box-shadow:0 0 0 3px rgba(216,45,139,.16)}
+.form-wide{max-width:760px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.poster-preview{display:block;width:120px;height:170px;object-fit:cover;border-radius:10px;border:1px solid var(--border);margin-top:10px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.hint{font-size:12px;color:var(--muted);margin:6px 0 0}
+
+.pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:11.5px;font-weight:750;background:#f1edf5;color:#554d66}
+.pill-cong_bo{background:#dcfce7;color:#166534}
+.pill-nhap{background:#fef3c7;color:#92400e}
+.pill-an{background:#f3f4f6;color:#4b5563}
+.thumb{width:42px;height:60px;object-fit:cover;border-radius:6px;background:var(--mint);display:block}
+.cell-actions{display:flex;gap:10px;align-items:center}
+.cell-actions form{margin:0}
+
+.detail{display:grid;grid-template-columns:310px 1fr;gap:38px;padding:42px 0 60px}
+.detail-poster{aspect-ratio:2/3;border-radius:20px;background-size:cover;background-position:center;min-height:360px;box-shadow:0 18px 40px rgba(21,13,42,.22)}
+.day-group{margin-top:26px}
+.day-group h3{font-size:18px;margin-bottom:12px}
+.slot-list{display:flex;gap:12px;flex-wrap:wrap}
+.slot{display:block;min-width:185px;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;color:var(--ink);transition:all .15s ease;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.slot:hover{border-color:var(--green);text-decoration:none;transform:translateY(-2px);box-shadow:0 8px 18px rgba(216,45,139,.15)}
+.slot strong{display:block;font-size:20px;color:var(--green)}
+.slot span,.slot small{display:block;font-size:12px;color:var(--muted)}
+
+/* M5 - Lịch sử đặt vé, Quản lý đơn & Dashboard (tương thích MoMo Cinema CSS mà không cần đè Bootstrap lên toàn site) */
+.m5-stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-bottom:26px}
+.m5-stat-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow-sm)}
+.m5-stat-card .stat-label{font-size:12.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.m5-stat-card .stat-value{font-size:26px;font-weight:850;color:var(--ink);line-height:1.2}
+.m5-stat-card .stat-value.accent{color:var(--green)}
+.m5-charts-grid{display:grid;grid-template-columns:1.8fr 1fr;gap:22px;margin-bottom:26px}
+.m5-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow-sm);margin-bottom:22px}
+.m5-card h2{font-size:18px;margin-bottom:16px}
+.m5-badge{display:inline-block;padding:4px 11px;border-radius:999px;font-size:11.5px;font-weight:750}
+.m5-badge-warning{background:#fef3c7;color:#92400e}
+.m5-badge-success{background:#dcfce7;color:#166534}
+.m5-badge-secondary{background:#f3f4f6;color:#4b5563}
+.m5-badge-dark{background:#e5e7eb;color:#1f2937}
+
+@media(max-width:960px){
+  .m5-stats-grid{grid-template-columns:repeat(2,1fr)}
+  .m5-charts-grid{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .detail{grid-template-columns:1fr;gap:24px}
+  .detail-poster{max-width:260px}
+  .form-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .m5-stats-grid{grid-template-columns:1fr}
+}

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,5 +60,24 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('home')->with('success', 'Bạn đã đăng xuất.');
     }
-}
 
+    public function account(Request $request)
+    {
+        $user = $request->user()->loadCount('donHangs');
+        return view('auth.account', compact('user'));
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $request->user()->update($request->validated());
+        return redirect()->route('account')->with('success', 'Đã cập nhật thông tin cá nhân.');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $request->user()->update([
+            'mat_khau' => $request->validated('password'),
+        ]);
+        return redirect()->route('account')->with('success', 'Đã đổi mật khẩu thành công.');
+    }
+}

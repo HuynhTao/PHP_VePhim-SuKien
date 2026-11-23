@@ -35,8 +35,8 @@ class DatabaseAndHomeTest extends TestCase
     {
         $this->seed();
         NoiDung::create(['tieu_de' => 'Nội dung chưa công bố', 'loai_noi_dung' => 'phim', 'trang_thai' => 'nhap']);
-        $this->get(route('home'))->assertOk()->assertSee('Chuyến đi mùa hạ')->assertDontSee('Nội dung chưa công bố');
-        $this->get(route('home', ['loai' => 'su_kien']))->assertOk()->assertSee('Đêm nhạc dưới ánh sao')->assertDontSee('Chuyến đi mùa hạ');
+        $this->get(route('home'))->assertOk()->assertSee('Trại Giam Hạnh Phúc')->assertDontSee('Nội dung chưa công bố');
+        $this->get(route('home', ['loai' => 'su_kien']))->assertOk()->assertSee('BTS WORLD TOUR ARIRANG IN KAOHSIUNG: LIVE VIEWING')->assertDontSee('Trại Giam Hạnh Phúc');
         $this->get(route('home', ['q' => 'khong-khop']))->assertOk()->assertSee('Chưa tìm thấy nội dung phù hợp');
         $this->get(route('register'))->assertOk();
         $this->get(route('login'))->assertOk();
@@ -61,12 +61,12 @@ class DatabaseAndHomeTest extends TestCase
         GheTheoSuat::create(['suat_id' => $seat->suat_id, 'ghe_ngoi_id' => $seat->ghe_ngoi_id, 'gia_ve' => 100000]);
     }
 
-    public function test_database_rejects_two_tickets_for_the_same_seat(): void
+    public function test_database_rejects_duplicate_ticket_code(): void
     {
         $this->seed();
         $ticket = Ve::firstOrFail();
         $this->expectException(QueryException::class);
         Ve::create(['don_hang_id' => $ticket->don_hang_id, 'ghe_theo_suat_id' => $ticket->ghe_theo_suat_id,
-            'ma_ve' => 'ANOTHER-CODE', 'gia_ban' => 90000, 'phat_hanh_luc' => now()]);
+            'ma_ve' => $ticket->ma_ve, 'gia_ban' => 90000, 'phat_hanh_luc' => now()]);
     }
 }

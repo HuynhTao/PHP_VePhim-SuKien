@@ -1,16 +1,25 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DiaDiemController;
+use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\GheNgoiController;
+use App\Http\Controllers\Admin\PhimSuKienController;
 use App\Http\Controllers\Admin\PhongChieuController;
 use App\Http\Controllers\Admin\SuatController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DatVeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LichSuDatVeController;
+use App\Http\Controllers\NoiDungController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+// ===== M2 – Trang chi tiết phim/sự kiện & tìm kiếm nhanh AJAX =====
+Route::get('/noi-dung/{noiDung}', [NoiDungController::class, 'show'])->name('noi-dung.show');
+Route::get('/tim-kiem-nhanh', [NoiDungController::class, 'quickSearch'])->name('noi-dung.search');
 
 Route::middleware('guest')->group(function () {
     Route::get('/dang-ky', [AuthController::class, 'register'])->name('register');
@@ -32,11 +41,33 @@ Route::middleware(['auth', 'role:admin,user'])->prefix('dat-ve')->name('datve.')
     Route::post('don-hang/{donHang}/huy', [DatVeController::class, 'huy'])->name('huy');
     Route::get('don-hang/{donHang}/thanh-cong', [DatVeController::class, 'thanhCong'])->name('thanh-cong');
 });
-Route::view('/tai-khoan', 'auth.account')->middleware(['auth', 'role:admin,user'])->name('account');
 
+// ===== M1 – Hồ sơ cá nhân & Đổi mật khẩu =====
+Route::middleware(['auth', 'role:admin,user'])->group(function () {
+    Route::get('/tai-khoan', [AuthController::class, 'account'])->name('account');
+    Route::put('/tai-khoan', [AuthController::class, 'updateProfile'])->name('account.update');
+    Route::put('/tai-khoan/mat-khau', [AuthController::class, 'updatePassword'])->name('account.password');
+
+    // ===== M5 – Lịch sử đặt vé & Hủy vé của User =====
+    Route::get('/lich-su-dat-ve', [LichSuDatVeController::class, 'index'])->name('orders.index');
+    Route::get('/lich-su-dat-ve/{donHang}', [LichSuDatVeController::class, 'show'])->name('orders.show');
+    Route::post('/lich-su-dat-ve/{donHang}/huy', [LichSuDatVeController::class, 'cancel'])->name('orders.cancel');
+});
+
+// ===== Khu vực Quản trị (Admin: M1 + M2 + M3 + M5) =====
 Route::prefix('quan-tri')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::redirect('/', '/quan-tri/nguoi-dung');
+
+    // M1: Quản lý tài khoản
     Route::resource('nguoi-dung', UserController::class)->parameters(['nguoi-dung' => 'user'])->names('users');
+
+    // M2: Quản lý phim / sự kiện
+    Route::resource('phim-su-kien', PhimSuKienController::class)
+        ->parameters(['phim-su-kien' => 'noiDung'])
+        ->names('noidung')
+        ->except(['show']);
+
+    // M3: Quản lý rạp, bản đồ, phòng chiếu, ghế, suất chiếu
     Route::resource('dia-diem', DiaDiemController::class)
         ->parameters(['dia-diem' => 'diaDiem'])
         ->except(['show']);
@@ -48,4 +79,9 @@ Route::prefix('quan-tri')->name('admin.')->middleware(['auth', 'role:admin'])->g
     Route::delete('phong-chieu/{phongChieu}/ghe/{gheNgoi}', [GheNgoiController::class, 'destroy'])->name('ghe.destroy');
     Route::resource('suat', SuatController::class);
 
+    // M5: Quản lý đơn đặt vé & Dashboard thống kê
+    Route::get('don-hang', [DonHangController::class, 'index'])->name('orders.index');
+    Route::get('don-hang/{donHang}', [DonHangController::class, 'show'])->name('orders.show');
+    Route::patch('don-hang/{donHang}/trang-thai', [DonHangController::class, 'updateStatus'])->name('orders.status');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 });
