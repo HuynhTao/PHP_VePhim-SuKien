@@ -32,14 +32,17 @@ Route::post('/dang-xuat', [AuthController::class, 'logout'])->middleware('auth')
 
 // ===== M4 – Đặt vé =====
 Route::get('/dat-ve', [DatVeController::class, 'index'])->name('datve.index');
-Route::middleware(['auth', 'role:admin,user'])->prefix('dat-ve')->name('datve.')->group(function () {
+Route::prefix('dat-ve')->name('datve.')->group(function () {
     Route::get('suat/{suat}', [DatVeController::class, 'chonGhe'])->name('chon-ghe');
     Route::get('suat/{suat}/trang-thai', [DatVeController::class, 'trangThai'])->name('trang-thai');
-    Route::post('suat/{suat}/giu-ghe', [DatVeController::class, 'giuGhe'])->middleware('throttle:20,1')->name('giu-ghe');
-    Route::get('don-hang/{donHang}/thanh-toan', [DatVeController::class, 'thanhToan'])->name('thanh-toan');
-    Route::post('don-hang/{donHang}/thanh-toan', [DatVeController::class, 'xacNhan'])->name('thanh-toan.xac-nhan');
-    Route::post('don-hang/{donHang}/huy', [DatVeController::class, 'huy'])->name('huy');
-    Route::get('don-hang/{donHang}/thanh-cong', [DatVeController::class, 'thanhCong'])->name('thanh-cong');
+
+    Route::middleware(['auth', 'role:admin,user'])->group(function () {
+        Route::post('suat/{suat}/giu-ghe', [DatVeController::class, 'giuGhe'])->middleware('throttle:20,1')->name('giu-ghe');
+        Route::get('don-hang/{donHang}/thanh-toan', [DatVeController::class, 'thanhToan'])->name('thanh-toan');
+        Route::post('don-hang/{donHang}/thanh-toan', [DatVeController::class, 'xacNhan'])->name('thanh-toan.xac-nhan');
+        Route::post('don-hang/{donHang}/huy', [DatVeController::class, 'huy'])->name('huy');
+        Route::get('don-hang/{donHang}/thanh-cong', [DatVeController::class, 'thanhCong'])->name('thanh-cong');
+    });
 });
 
 // ===== M1 – Hồ sơ cá nhân & Đổi mật khẩu =====
@@ -56,7 +59,7 @@ Route::middleware(['auth', 'role:admin,user'])->group(function () {
 
 // ===== Khu vực Quản trị (Admin: M1 + M2 + M3 + M5) =====
 Route::prefix('quan-tri')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::redirect('/', '/quan-tri/nguoi-dung');
+    Route::redirect('/', '/quan-tri/dashboard');
 
     // M1: Quản lý tài khoản
     Route::resource('nguoi-dung', UserController::class)->parameters(['nguoi-dung' => 'user'])->names('users');

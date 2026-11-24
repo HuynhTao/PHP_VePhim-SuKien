@@ -19,7 +19,7 @@ class LichSuDatVeController extends Controller
         $this->datVe->nhaGheHetHan();
 
         $donHangs = DonHang::where('nguoi_dung_id', $request->user()->id)
-            ->withCount('ves')
+            ->withCount(['ves', 'gheDangGiu'])
             ->when($request->filled('trang_thai'), fn ($q) => $q->where('trang_thai', $request->trang_thai))
             ->latest('dat_luc')
             ->paginate(10)
@@ -54,10 +54,16 @@ class LichSuDatVeController extends Controller
     {
         $this->authorizeOwner($request, $donHang);
 
+        if ($donHang->trang_thai === 'cho_thanh_toan') {
+            $this->datVe->huy($donHang);
+
+            return redirect()->route('orders.show', $donHang)->with('success', 'Đã hủy đơn và giải phóng ghế.');
+        }
+
         $loi = DB::transaction(function () use ($donHang) {
             // Khóa dòng đơn để tránh bấm hủy 2 lần cùng lúc
             $don = DonHang::whereKey($donHang->id)->lockForUpdate()->firstOrFail();
-            $don->load('ves.gheTheoSuat.suat');
+            $don->load('ves.gheTheoSuat.suat', 'gheDangGiu.suat');
 
             if (! $this->coTheHuy($don)) {
                 return 'Đơn này không thể hủy (đã hủy, hết hạn hoặc quá gần giờ chiếu).';
@@ -86,7 +92,10 @@ class LichSuDatVeController extends Controller
 
     private function coTheHuy(DonHang $don): bool
     {
-        if (! in_array($don->trang_thai, ['cho_thanh_toan', 'da_thanh_toan'], true)) {
+        if ($don->trang_thai === 'cho_thanh_toan') {
+            return true;
+        }
+        if ($don->trang_thai !== 'da_thanh_toan') {
             return false;
         }
 

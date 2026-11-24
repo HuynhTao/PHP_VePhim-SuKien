@@ -42,7 +42,7 @@
                 <tr>
                     <td><strong>{{ $don->ma_don_hang }}</strong></td>
                     <td>{{ $don->dat_luc?->format('d/m/Y H:i') }}</td>
-                    <td>{{ $don->ves_count }}</td>
+                    <td>{{ $don->ves_count ?: $don->ghe_dang_giu_count }}</td>
                     <td><strong>{{ number_format($don->tong_tien, 0, ',', '.') }}đ</strong></td>
                     <td>@include('orders._badge', ['trangThai' => $don->trang_thai])</td>
                     <td>

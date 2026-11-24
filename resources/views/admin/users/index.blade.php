@@ -2,6 +2,7 @@
 @section('title', 'Quản lý tài khoản')
 @section('content')
 <section class="admin-page">
+@include('admin.m3-nav')
 <div class="section-heading"><div><span class="eyebrow">QUẢN TRỊ HỆ THỐNG</span><h1>Quản lý tài khoản</h1><p class="muted">{{ $users->total() }} tài khoản phù hợp</p></div><a class="btn" href="{{ route('admin.users.create') }}">+ Thêm tài khoản</a></div>
 <form class="filter-bar" method="GET">
 <label class="sr-only" for="q">Tìm tài khoản</label><input id="q" name="q" value="{{ request('q') }}" placeholder="Tìm theo tên hoặc email" maxlength="100">

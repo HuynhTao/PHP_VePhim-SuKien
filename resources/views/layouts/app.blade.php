@@ -15,6 +15,8 @@
 @include('partials.header')
 <main id="main" class="container">
     @if(session('success'))<div class="alert success" role="status">{{ session('success') }}</div>@endif
+    @if(session('notice'))<div class="alert" role="status">{{ session('notice') }}</div>@endif
+    @if(session('error'))<div class="alert error" role="alert">{{ session('error') }}</div>@endif
     @if($errors->any())
         <div class="alert error" role="alert"><strong>Vui lòng kiểm tra lại:</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
     @endif

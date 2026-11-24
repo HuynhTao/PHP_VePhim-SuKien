@@ -16,7 +16,7 @@ class DonHangController extends Controller
     {
         $this->datVe->nhaGheHetHan();
         $donHangs = DonHang::with('nguoiDung')
-            ->withCount('ves')
+            ->withCount(['ves', 'gheDangGiu'])
             ->when($request->filled('q'), function ($query) use ($request) {
                 $q = trim($request->q);
                 $query->where(function ($sub) use ($q) {

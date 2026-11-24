@@ -11,8 +11,10 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-    public function register()
+    public function register(Request $request)
     {
+        $this->rememberRedirectTarget($request);
+
         return view('auth.register');
     }
 
@@ -34,23 +36,46 @@ class AuthController extends Controller
         ]);
         Auth::login($user);
         $request->session()->regenerate();
-        return redirect()->route('home')->with('success', 'Đăng ký thành công. Chào mừng bạn!');
+
+        return redirect()->intended(route('home'))->with('success', 'Đăng ký thành công. Chào mừng bạn!');
     }
 
-    public function login()
+    public function login(Request $request)
     {
+        $this->rememberRedirectTarget($request);
+
         return view('auth.login');
     }
 
     public function authenticate(Request $request)
     {
+        if ($suatUrl = $request->session()->get('_intended_suat_url')) {
+            $request->session()->put('url.intended', $suatUrl);
+        }
         $request->merge(['email' => mb_strtolower(trim((string) $request->input('email')))]);
         $data = $request->validate(['email' => ['required', 'email'], 'password' => ['required', 'string']]);
         if (! Auth::attempt($data, $request->boolean('remember'))) {
             return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.'])->onlyInput('email');
         }
         $request->session()->regenerate();
+
         return redirect()->intended(route(Auth::user()->isAdmin() ? 'admin.users.index' : 'home'));
+    }
+
+    private function rememberRedirectTarget(Request $request): void
+    {
+        if ($suatUrl = $request->session()->get('_intended_suat_url')) {
+            $request->session()->put('url.intended', $suatUrl);
+        }
+        $redirect = (string) $request->query('redirect', '');
+        if ($redirect === '') {
+            return;
+        }
+        if (str_starts_with($redirect, '/') && ! str_starts_with($redirect, '//')) {
+            $request->session()->put('url.intended', url($redirect));
+        } elseif (str_starts_with($redirect, $request->getSchemeAndHttpHost().'/')) {
+            $request->session()->put('url.intended', $redirect);
+        }
     }
 
     public function logout(Request $request)

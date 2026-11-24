@@ -44,6 +44,9 @@ class DatVeController extends Controller
             ->orderBy('tieu_de')->paginate(6)->withQueryString();
 
         $ngays = collect(range(0, 6))->map(fn ($i) => today()->addDays($i));
+        if (! $ngays->contains(fn (Carbon $d) => $d->isSameDay($ngay))) {
+            $ngays->push($ngay->copy());
+        }
         $raps = DiaDiem::where('trang_thai', 'hoat_dong')->orderBy('ten_dia_diem')->get();
 
         return view('datve.index', compact('contents', 'ngay', 'ngays', 'raps'));
@@ -71,10 +74,12 @@ class DatVeController extends Controller
             ->sortBy(fn ($g) => $g->gheNgoi->hang_ghe . str_pad($g->gheNgoi->so_ghe, 3, '0', STR_PAD_LEFT))
             ->groupBy(fn ($g) => $g->gheNgoi->hang_ghe);
 
-        $donCho = DonHang::where('nguoi_dung_id', $nguoiDungId)
-            ->where('trang_thai', 'cho_thanh_toan')
-            ->whereHas('gheDangGiu', fn ($q) => $q->where('suat_id', $suatId))
-            ->first();
+        $donCho = $nguoiDungId
+            ? DonHang::where('nguoi_dung_id', $nguoiDungId)
+                ->where('trang_thai', 'cho_thanh_toan')
+                ->whereHas('gheDangGiu', fn ($q) => $q->where('suat_id', $suatId))
+                ->first()
+            : null;
 
         return view('datve.chon_ghe', compact('suat', 'ghes', 'donCho'));
     }

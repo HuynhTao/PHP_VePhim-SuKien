@@ -12,6 +12,15 @@
 @if($donCho)
 <div class="alert success">Bạn đang giữ ghế cho đơn <strong>{{ $donCho->ma_don_hang }}</strong>. <a href="{{ route('datve.thanh-toan', $donCho) }}">Tiếp tục thanh toán →</a></div>
 @endif
+@guest
+<div class="alert" role="status" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <span>👋 Bạn đang xem trước sơ đồ ghế. Vui lòng <strong>đăng nhập</strong> hoặc <strong>đăng ký</strong> để giữ ghế và thanh toán.</span>
+    <div style="display:flex;gap:8px">
+        <a class="btn btn-small" href="{{ route('login', ['redirect' => route('datve.chon-ghe', $suat)]) }}">Đăng nhập</a>
+        <a class="btn btn-small btn-outline" href="{{ route('register', ['redirect' => route('datve.chon-ghe', $suat)]) }}">Đăng ký</a>
+    </div>
+</div>
+@endguest
 <form method="POST" action="{{ route('datve.giu-ghe', $suat) }}" class="dv-layout">@csrf
 <div class="dv-panel">
 <div class="dv-screen">MÀN HÌNH / SÂN KHẤU</div>
@@ -54,7 +63,11 @@
 <div id="dv-ds" class="dv-chips"><span class="muted">Chưa chọn ghế</span></div>
 <div class="dv-totalrow"><span class="muted">Tổng tiền</span><div class="dv-total" id="dv-tong">0đ</div></div>
 <p class="muted" style="font-size:12px">Ghế được giữ {{ \App\Services\DatVeService::PHUT_GIU_GHE }} phút sau khi bấm tiếp tục. Tối đa {{ \App\Services\DatVeService::TOI_DA_GHE }} ghế/đơn.</p>
+@auth
 <button class="btn btn-block dv-go" id="dv-btn" disabled>Tiếp tục thanh toán →</button>
+@else
+<a class="btn btn-block dv-go" id="dv-btn" href="{{ route('login', ['redirect' => route('datve.chon-ghe', $suat)]) }}">Đăng nhập để giữ ghế &amp; thanh toán →</a>
+@endauth
 </aside>
 </form>
 </section>

@@ -19,6 +19,10 @@
 <div class="dv-ticket2-stub"><small>GHẾ</small><strong class="dv-seatbig">{{ $g->gheNgoi->hang_ghe }}{{ $g->gheNgoi->so_ghe }}</strong><small>{{ number_format($ve->gia_ban, 0, ',', '.') }}đ</small></div>
 </div>
 @endforeach
-<div class="form-actions" style="justify-content:center"><a class="btn" href="{{ route('datve.index') }}">Đặt thêm vé</a><a class="btn btn-outline" href="{{ route('home') }}">Về trang chủ</a></div>
+<div class="form-actions" style="justify-content:center">
+    <a class="btn" href="{{ route('orders.show', $don) }}">Xem chi tiết đơn &amp; vé</a>
+    <a class="btn btn-outline" href="{{ route('datve.index') }}">Đặt thêm vé</a>
+    <a class="btn btn-outline" href="{{ route('home') }}">Về trang chủ</a>
+</div>
 </section>
 @endsection

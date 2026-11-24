@@ -16,13 +16,19 @@ class HomeController extends Controller
             'muc' => ['nullable', 'in:dang_chieu,sap_chieu,su_kien'],
             'q' => ['nullable', 'string', 'max:100'],
         ]);
+        $loai = $filters['loai'] ?? null;
         $muc = $filters['muc'] ?? null;
+        if ($loai === 'su_kien' && in_array($muc, ['dang_chieu', 'sap_chieu'], true)) {
+            $muc = 'su_kien';
+        } elseif ($loai === 'phim' && $muc === 'su_kien') {
+            $muc = null;
+        }
 
         $contents = NoiDung::query()->congBo()
             ->with(['phim', 'suKien', 'suats' => fn ($query) => $query
                 ->where('trang_thai', 'mo_ban')->where('bat_dau_luc', '>', now())
                 ->with('phongChieu.diaDiem')->orderBy('bat_dau_luc')])
-            ->when($filters['loai'] ?? null, fn ($query, $type) => $query->where('loai_noi_dung', $type))
+            ->when($loai, fn ($query, $type) => $query->where('loai_noi_dung', $type))
             ->when($filters['q'] ?? null, fn ($query, $search) => $query->where('tieu_de', 'like', '%'.$search.'%'))
             ->when($muc === 'dang_chieu', fn ($query) => $query->where('loai_noi_dung', 'phim')->whereHas(
                 'phim', fn ($p) => $p->whereDate('ngay_khoi_chieu', '<=', today())

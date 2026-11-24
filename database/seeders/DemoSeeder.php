@@ -365,7 +365,7 @@ class DemoSeeder extends Seeder
                 $room = $roomPool[$i % count($roomPool)];
                 $round = intdiv($i, count($roomPool));
                 $slot = $timeSlots[$round % count($timeSlots)];
-                $dayOffset = $isUpcoming ? (($i % 10) + 4) : (intdiv($round, count($timeSlots)) + 1);
+                $dayOffset = $isUpcoming ? (($i % 5) + 2) : (($i % 5) + 1);
 
                 $start = now()->addDays($dayOffset)->setTime($slot[0], $slot[1]);
                 $session = Suat::where('noi_dung_id', $content->id)
